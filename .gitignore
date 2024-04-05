@@ -1,0 +1,17 @@
+data/bitcoin/*
+!data/bitcoin/.gitkeep
+
+data/lnd/*
+!data/lnd/.gitkeep
+
+data/rtl/*
+!data/rtl/.gitkeep
+
+data/electrs/*
+!data/electrs/.gitkeep
+
+data/tor/*
+!data/tor/.gitkeep
+
+data/scb/*
+!data/scb/.gitkeep

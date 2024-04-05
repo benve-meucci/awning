@@ -1,0 +1,130 @@
+version: '2'
+
+
+services:
+
+  tor:
+    container_name: tor
+    user: "1000:1000"
+    build:
+      context: ./Dockerfiles/
+      dockerfile: Dockerfile.tor
+    ports:
+      - "9050:9050"
+    volumes:
+      - ./data/tor:/data/cookie
+      - ./configs/torrc:/etc/tor/torrc:ro
+    restart: unless-stopped
+
+  bitcoin:
+    container_name: bitcoin
+    user: "1000:1000"
+    depends_on: [tor]
+    build:
+      context: ./Dockerfiles/
+      dockerfile: Dockerfile.bitcoin
+      args:
+        BITCOIN_ARCH: ${BITCOIN_ARCH}
+    ports:
+      - "8332:8332"
+      - "8333:8333"
+    volumes:
+      - ./data/bitcoin:/data/.bitcoin
+      - ./data/tor:/data/cookie:ro
+      - ./configs/bitcoin.conf:/data/.bitcoin/bitcoin.conf:ro
+    restart: unless-stopped
+
+  electrs:
+    container_name: electrs
+    user: "1000:1000"
+    depends_on: [bitcoin]
+    build:
+      context: ./Dockerfiles/
+      dockerfile: Dockerfile.electrs
+    volumes:
+      - ./configs/electrs.toml:/data/electrs.toml:ro
+      - ./data/electrs:/data
+      - ./data/bitcoin:/data/.bitcoin:ro
+    restart: unless-stopped
+
+  lnd:
+    container_name: lnd
+    user: "1000:1000"
+    depends_on: [bitcoin, tor]
+    build:
+      context: ./Dockerfiles/
+      dockerfile: Dockerfile.lnd
+      args:
+        LND_ARCH: ${LND_ARCH}
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data/lnd:/data/.lnd
+      - ./data/tor:/data/cookie:ro
+      - ./data/bitcoin:/data/.bitcoin:ro
+      - ./configs/lnd.conf:/data/.lnd/lnd.conf:ro
+    environment:
+      LND_PASSWORD: ${LND_PASSWORD}
+    restart: unless-stopped
+
+  scb:
+    container_name: scb
+    user: "1000:1000"
+    depends_on: [lnd]
+    build:
+      context: ./Dockerfiles/
+      dockerfile: Dockerfile.scb
+    volumes:
+      - ./data/scb:/data
+      - ./data/lnd:/lnd:ro
+    environment:
+      SCB_REPO: ${SCB_REPO}
+    restart: unless-stopped
+
+  rtl:
+    container_name: rtl
+    user: "1000:1000"
+    depends_on: [lnd]
+    build:
+      context: ./Dockerfiles/
+      dockerfile: Dockerfile.rtl
+    volumes:
+      - ./configs/rtl.json:/data/RTL/RTL-Config.json
+      - ./configs/lnd.conf:/data/lnd.conf:ro
+      - ./data/lnd:/data/.lnd:ro
+      - ./data/rtl:/data/rtldb
+    environment:
+      APP_PASSWORD: ${RTL_PASSWORD}
+    restart: unless-stopped
+
+  nginx:
+    container_name: nginx
+    depends_on: [rtl, electrs, lnd]
+    build:
+      context: ./Dockerfiles/
+      dockerfile: Dockerfile.nginx
+    ports:
+      - "50002:50002" #electrs ssl
+      - "8081:8081"   #rtl ssl
+      - "8082:8082"   #rtl no ssl
+    volumes:
+      - ./configs/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./configs/nginx-reverse-proxy.conf:/etc/nginx/streams-enabled/nginx-reverse-proxy.conf:ro
+    restart: unless-stopped
+
+
+  # dokku:
+  #   container_name: dokku
+  #   image: dokku/dokku:0.33.3
+  #   restart: unless-stopped
+  #   environment:
+  #     - DOKKU_HOSTNAME=dokku.example.it
+  #     - DOKKU_HOST_ROOT=/var/lib/dokku/home/dokku
+  #     - DOKKU_LIB_HOST_ROOT=/var/lib/dokku/var/lib/dokku
+  #   network_mode: bridge
+  #   ports:
+  #     - "2210:22"
+  #     - "8443:443"
+  #   volumes:
+  #     - /var/lib/dokku:/mnt/dokku
+  #     - /var/run/docker.sock:/var/run/docker.sock

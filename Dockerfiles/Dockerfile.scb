@@ -1,0 +1,8 @@
+FROM debian:bookworm-slim
+RUN apt-get update && apt-get install -y inotify-tools git && rm -rf /var/lib/apt/lists/*
+RUN adduser --disabled-password --uid 1000 --home /data --gecos "" scb
+ADD entrypoints/scb.sh /scb.sh
+RUN chmod +x /scb.sh
+USER scb
+WORKDIR /data
+ENTRYPOINT ["/scb.sh"]
