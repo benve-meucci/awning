@@ -1,5 +1,7 @@
-# AWNING - A dockerized Bitcoin + LND node
+# AWNING: A dockerized Bitcoin + LND node
 Something like [Umbrel](https://umbrel.com) but uglier, Bitcoin/Lightning-Network oriented and with no frills. With all the best-practices of [RaspiBolt](https://raspibolt.org/).
+
+**Awning** doesn't install anything on your PC, making it lightweight, customizable and portable.
 
 # Prerequisites
 - docker
