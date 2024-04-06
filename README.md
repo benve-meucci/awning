@@ -11,7 +11,7 @@ It is a plain/vanilla Docker setup. **No script is ever run in your host.**
 
 # Before you begin
 
-Clone this repository and enter the project directory.
+Clone or download this repository and enter the project directory.
   ```sh
   $ git clone https://github.com/giovantenne/awning.git
   $ cd awning
