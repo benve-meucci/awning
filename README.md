@@ -8,7 +8,7 @@ Run your BTC/LN node in 6 steps:
 1. [Clone this repository](#1)
 2. [Create a Github repository for storing the LND Static Channel Backups (SCB)](#²)
 3. [Edit and customize the `.env` file](#³)
-4. [Run the Docker containers with `docker-compose up -d`](#4)
+4. [Start the Docker containers](#4)
 5. [Authorize SCB to be uploaded on Github](#5)
 6. [Create o restore a LND wallet](#6)
 
