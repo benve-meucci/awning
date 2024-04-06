@@ -43,7 +43,7 @@ This will spin-up the following services/containers in background:
 - [LND](https://github.com/lightningnetwork/lnd)
 - [RTL](https://github.com/Ride-The-Lightning/RTL) (Ride The Lightning)
 - [TOR](https://www.torproject.org/)
-- Nginx (used as reverse-proxy)
+- [Nginx](https://github.com/nginx) (used as reverse-proxy)
 - [SCB](https://github.com/lightningnetwork/lnd/blob/master/docs/recovery.md) (Automatic static channel backups)
 
 The first time it will take some time to build all the images from scratch (especially compiling the Electrs binary).
@@ -124,11 +124,11 @@ To create a a new wallet, select `n` when asked if you have an existing cipher s
 ├── LICENSE
 └── README.md
 ```
-## config
+### config
 Here you can find all the configuration files. Feel free to edit them as you like, but please be carefull to not mess-up with authentication method: **Awning** currently uses cookies authentication between services instead of RPC.
 
-## data
+### data
 Here is where the data are persisted. THe Bitcon Blockchain, the Electrs indexes, the LND channels, etc. are all stored here
 
-## Dockerfiles
+### Dockerfiles
 Here you can find and inspect all the files used to build the images. **Don't trust, verify**!
