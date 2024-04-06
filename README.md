@@ -35,7 +35,7 @@ The `.env` file contains some **Awning** setup parameters that you can customize
 
 # How to begin
 
-Run the following command:
+Fork/clone this repo, enter the project directory and run the following command:
   ```sh
   $ docker-compose up -d
   ```
