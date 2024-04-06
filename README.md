@@ -12,6 +12,10 @@ It is a plain/vanilla Docker setup. **No script is ever run in your host.**
 # Before you begin
 
 Clone this repository and enter the project directory.
+  ```sh
+  $ git clone https://github.com/giovantenne/awning.git
+  $ cd awning
+  ```
 
 ## LND channel backups preparation
 The Static Channels Backup (SCB) is a feature of LND that allows for the on-chain recovery of lightning channel balances in the case of a bricked node. Despite its name, it does not allow the recovery of your LN channels but increases the chance that you'll recover all (or most) of your off-chain (local) balances.
