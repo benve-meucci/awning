@@ -3,6 +3,7 @@ Something like [Umbrel](https://umbrel.com) but uglier, Bitcoin/Lightning-Networ
 
 **Awning** doesn't install anything on your PC, making it lightweight, customizable and portable. 
 It is a plain/vanilla Docker setup. **No script is ever run in your host.**
+
 Run your BTC/LN node in 6 steps:
 
 1. [Clone this repository](#1)
