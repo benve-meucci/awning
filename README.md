@@ -1,7 +1,8 @@
-# AWNING: A dockerized Bitcoin + LND node
+# Awning: A dockerized Bitcoin + LND node
 Something like [Umbrel](https://umbrel.com) but uglier, Bitcoin/Lightning-Network oriented and with no frills. With all the best-practices of [RaspiBolt](https://raspibolt.org/).
 
 **Awning** doesn't install anything on your PC, making it lightweight, customizable and portable.
+No script is ever run in your host.
 
 # Prerequisites
 - docker
@@ -9,7 +10,7 @@ Something like [Umbrel](https://umbrel.com) but uglier, Bitcoin/Lightning-Networ
 
 # Before you begin
 
-Clone this repo and enter the project directory.
+Clone this repository and enter the project directory.
 
 ## LND channel backups preparation
 The Static Channels Backup (SCB) is a feature of LND that allows for the on-chain recovery of lightning channel balances in the case of a bricked node. Despite its name, it does not allow the recovery of your LN channels but increases the chance that you'll recover all (or most) of your off-chain (local) balances.
