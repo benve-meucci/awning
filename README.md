@@ -25,30 +25,46 @@ The Static Channels Backup (SCB) is a feature of LND that allows for the on-chai
 The `.env` file contains some **Awning** setup parameters that you can customize:
 
 - **BITCOIN_ARCH** - Here you need to choose your computer CPU architecture. Write `aarch64` for ARM (Raspberry Pi, etc) or `x86_64` for Intel or AMD.
-- **LND_ARCH** - Same as above. Write `arm64` for ARM (Raspberry Pi, etc) or `amd64` for Intel or AMD.
+- **LND_ARCH** - Write `arm64` for ARM (Raspberry Pi, etc) or `amd64` for Intel or AMD.
 - **RTL_PASSWORD** - Choose the password for accessing the *"Ride The Lightning"* web interface. You can change it any time but don't forget to restart the RTL container afterwards with `docker-compose restart rtl`.
-- <a name="pwd"></a>**LND_PASSWORD** - Choose the password to automatically protected and unlock the LND wallet. You will need to use this password again [here](#lnd). Please do not change it after the first setup.
-- <a name="repo"></a>**SCB_REPO** - Paste here the address of your new created Github. It should be something like `git@github.com:giovantenne/remote-lnd-backup.git`.
+- <a name="pwd"></a>**LND_PASSWORD** - Choose the password to automatically protected and unlock the LND wallet. You will need to use this password again [here](#lnd). Changing this after the first setup will have no effect.
+- <a name="repo"></a>**SCB_REPO** - Paste here the address of your new created Github repository. It should be something like `git@github.com:giovantenne/remote-lnd-backup.git`.
 
 
 # How to begin
 
-Run `docker-compose up -d` to spin-up the following services/containers:
-- Bitcoin core
-- Electrs
-- LND
-- RTL (Ride The Lightning)
-- TOR
+Run the following command:
+  ```sh
+  $ docker-compose up -d
+  ```
+This will spin-up the following services/containers in background:
+- [Bitcoin Core](https://github.com/bitcoin/bitcoin)
+- [Electrs](https://github.com/bitcoin/bitcoin)
+- [LND](https://github.com/lightningnetwork/lnd)
+- [RTL](https://github.com/Ride-The-Lightning/RTL) (Ride The Lightning)
+- [TOR](https://www.torproject.org/)
 - Nginx (used as reverse-proxy)
-- SCB (Automatic static channel backups)
+- [SCB](https://github.com/lightningnetwork/lnd/blob/master/docs/recovery.md) (Automatic static channel backups)
 
-The first time it will take some time to build all the images from scratch (especially compiling the Electrs binary)
+The first time it will take some time to build all the images from scratch (especially compiling the Electrs binary).
 
-You can stop the continars with `docker-compose down`.
+After all the images are built, “bitcoind” should start, begin to sync and validate the Bitcoin blockchain. If you already downloaded the blockchain somewhere else, you can just copy the data to the `./data/bitcoin` directory.
+
+Check the status of the bitcoin daemon that was started with the following command. Exit with Ctrl-C
+
+  ```sh
+  $ docker logs -f bitcoin
+  ```
+
+You can stop all the continars with
+  ```sh
+  $ docker-compose down
+  ```
+
 
 # Finish the setup
 
-Once you first start of the containers there is still a couple of steps to do:
+Once you first start the containers there is still a couple of steps to do:
 <a name="rsa"></a>
 ### Authorize SCB to be uploaded on Github
 
@@ -74,4 +90,45 @@ Run this command:
 
 Enter your password as wallet password (it must be exactly the same you stored in `.env` as [LND_PASSWORD](#pwd)). 
 
-To create a a new wallet, select n when asked if you have an existing cipher seed. Just press enter if asked about an additional seed passphrase, unless you know what you’re doing. A new cipher seed consisting of 24 words is created.
+To create a a new wallet, select `n` when asked if you have an existing cipher seed. Just press enter if asked about an additional seed passphrase, unless you know what you’re doing. A new cipher seed consisting of 24 words is created.
+
+# Directory structure
+```bash
+├── configs
+│   ├── bitcoin.conf
+│   ├── electrs.toml
+│   ├── lnd.conf
+│   ├── nginx.conf
+│   ├── nginx-reverse-proxy.conf
+│   ├── rtl.json
+│   └── torrc
+├── data
+│   ├── bitcoin
+│   ├── electrs
+│   ├── lnd
+│   ├── rtl
+│   ├── scb
+│   └── tor
+├── docker-compose.yml
+├── Dockerfiles
+│   ├── Dockerfile.bitcoin
+│   ├── Dockerfile.electrs
+│   ├── Dockerfile.lnd
+│   ├── Dockerfile.nginx
+│   ├── Dockerfile.rtl
+│   ├── Dockerfile.scb
+│   ├── Dockerfile.tor
+│   └── entrypoints
+│       ├── lnd.sh
+│       └── scb.sh
+├── LICENSE
+└── README.md
+```
+## config
+Here you can find all the configuration files. Feel free to edit them as you like, but please be carefull to not mess-up with authentication method: **Awning** currently uses cookies authentication between services instead of RPC.
+
+## data
+Here is where the data are persisted. THe Bitcon Blockchain, the Electrs indexes, the LND channels, etc. are all stored here
+
+## Dockerfiles
+Here you can find and inspect all the files used to build the images. **Don't trust, verify**!
