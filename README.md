@@ -1,14 +1,22 @@
 # Awning: A dockerized Bitcoin + LND node
 Something like [Umbrel](https://umbrel.com) but uglier, Bitcoin/Lightning-Network oriented and with no frills. With all the best-practices of [RaspiBolt](https://raspibolt.org/).
 
-**Awning** doesn't install anything on your PC, making it lightweight, customizable and portable.
-
+**Awning** doesn't install anything on your PC, making it lightweight, customizable and portable. 
 It is a plain/vanilla Docker setup. **No script is ever run in your host.**
+Run your BTC/LN node in 6 steps:
+
+1. [Clone this repository](#1)
+2. [Create a Github repository for storing the LND Static Channel Backups (SCB)](#²)
+3. [Edit and customize the `.env` file](#³)
+4. [Run the Docker containers with `docker-compose up -d`](#4)
+5. [Authorize SCB to be uploaded on Github](#5)
+6. [Create o restore a LND wallet](#6)
 
 # Prerequisites
 - docker
 - docker-compose
 
+<a name="1"></a>
 # Before you begin
 
 Clone or download this repository and enter the project directory.
@@ -22,6 +30,7 @@ The Static Channels Backup (SCB) is a feature of LND that allows for the on-chai
 
 **Awning** will automatically upload a copy of your `channel.backup` every time it changes on a Github repository, so you will need to create one and provide upload credential (see [here](#rsa))
 
+<a name="2"></a>
 #### Create a GitHub repository
 
 * Go to [GitHub](https://github.com/), sign up for a new user account, or log in with an existing one.
@@ -31,6 +40,7 @@ The Static Channels Backup (SCB) is a feature of LND that allows for the on-chai
   * Click on "Create repository"
   * Annotate your SSH repository address. You will need this [later](#repo).
 
+<a name="3"></a>
 ## Edit and understand the .env file
 
 The `.env` file contains some **Awning** setup parameters that you can/need to customize:
@@ -46,9 +56,7 @@ The `.env` file contains some **Awning** setup parameters that you can/need to c
 | `GID` | The gid (group id) of your current user. Use this command to retrieve it: `id -g`. |
 
 
-
-
-
+<a name="4"></a>
 # How to begin
 
 Run the following command:
@@ -83,7 +91,7 @@ You can stop all the continars with
 # Finish the setup
 
 Once you first start the containers there is still a couple of steps to do:
-<a name="rsa"></a>
+<a name="rsa"></a><a name="5"></a>
 ### Authorize SCB to be uploaded on Github
 
 Run this command:
@@ -98,7 +106,7 @@ Run this command:
 * In the "Key" box, copy/paste the string generated above starting (e.g. `ssh-rsa 5678efgh... scb@28ba58e278da`)
 * Tick the box "Allow write access" to enable this key to push changes to the repository
 * Click "Add key"
- <a name="lnd"></a>
+ <a name="lnd"></a><a name="6"></a>
 ### Create or restore the LND wallet
 
 Run this command:
