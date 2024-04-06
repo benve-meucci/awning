@@ -33,15 +33,20 @@ The Static Channels Backup (SCB) is a feature of LND that allows for the on-chai
 
 ## Edit and understand the .env file
 
-The `.env` file contains some **Awning** setup parameters that you can customize:
+The `.env` file contains some **Awning** setup parameters that you can/need to customize:
+<a name="repo"></a><a name="pwd"></a>
+| Parameter | Description |
+| --- | --- |
+| `BITCOIN_ARCH` | Here you need to choose your computer CPU architecture. Write `aarch64` for ARM (Raspberry Pi, etc) or `x86_64` for Intel or AMD. |
+| `LND_ARCH` | Write `arm64` for ARM (Raspberry Pi, etc) or `amd64` for Intel or AMD. |
+| `RTL_PASSWORD` | Choose the password for accessing the *"Ride The Lightning"* web interface. You can change it any time but don't forget to restart the RTL container afterwards with `docker-compose restart rtl`. |
+| <a name="pwd"></a>`LND_PASSWORD` | Choose the password to automatically protected and unlock the LND wallet. You will need to use this password again [here](#lnd). Changing this after the first setup will have no effect. |
+| `SCB_REPO` | Paste here the address of your new created Github repository. It should be something like `git@github.com:giovantenne/remote-lnd-backup.git`. |
+| `UID` | The uid (user id) of your current user. Use this command to retrieve it: `id -u`. |
+| `GID` | The gid (group id) of your current user. Use this command to retrieve it: `id -g`. |
 
-- **BITCOIN_ARCH** - Here you need to choose your computer CPU architecture. Write `aarch64` for ARM (Raspberry Pi, etc) or `x86_64` for Intel or AMD.
-- **LND_ARCH** - Write `arm64` for ARM (Raspberry Pi, etc) or `amd64` for Intel or AMD.
-- **RTL_PASSWORD** - Choose the password for accessing the *"Ride The Lightning"* web interface. You can change it any time but don't forget to restart the RTL container afterwards with `docker-compose restart rtl`.
-- <a name="pwd"></a>**LND_PASSWORD** - Choose the password to automatically protected and unlock the LND wallet. You will need to use this password again [here](#lnd). Changing this after the first setup will have no effect.
-- <a name="repo"></a>**SCB_REPO** - Paste here the address of your new created Github repository. It should be something like `git@github.com:giovantenne/remote-lnd-backup.git`.
-- **UID** - The uid (user id) of your current user. Use this command to retrieve it: `id -u`
-- **GID** - The gid (group id) of your current user. Use this command to retrieve it: `id -g`
+
+
 
 
 # How to begin
