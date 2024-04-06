@@ -37,6 +37,7 @@ The Static Channels Backup (SCB) is a feature of LND that allows for the on-chai
 * Go to [GitHub](https://github.com/), sign up for a new user account, or log in with an existing one.
 
 * Create a new repository: [https://github.com/new](https://github.com/new)
+  * Choose a repository name (eg. `remote-lnd-backup`)
   * Select "Private" (rather than the default "Public")
   * Click on "Create repository"
   * Annotate your SSH repository address. You will need this [later](#2).
