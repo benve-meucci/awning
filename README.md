@@ -130,7 +130,7 @@ To create a a new wallet, select `n` when asked if you have an existing cipher s
 Here you can find all the configuration files. Feel free to edit them as you like, but please be carefull to not mess-up with authentication method: **Awning** currently uses cookies authentication between services instead of RPC.
 
 ### data
-Here is where the data are persisted. THe Bitcon Blockchain, the Electrs indexes, the LND channels, etc. are all stored here
+Here is where the data are persisted. The Bitcon Blockchain, the Electrs indexes, the LND channels, etc. are all stored here
 
 ### Dockerfiles
 Here you can find and inspect all the files used to build the images. **Don't trust, verify**!
