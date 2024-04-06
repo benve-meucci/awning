@@ -126,7 +126,7 @@ To create a a new wallet, select `n` when asked if you have an existing cipher s
 ├── LICENSE
 └── README.md
 ```
-### config
+### configs
 Here you can find all the configuration files. Feel free to edit them as you like, but please be carefull to not mess-up with authentication method: **Awning** currently uses cookies authentication between services instead of RPC.
 
 ### data
