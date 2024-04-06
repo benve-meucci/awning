@@ -93,11 +93,11 @@ Run this command:
   ```
 
 * Go back to the GitHub repository webpage
-  * Click on "Settings", then "Deploy keys", then "Add deploy key"
-  * Type a title (e.g., "SCB")
-  * In the "Key" box, copy/paste the string generated above starting (e.g. `ssh-rsa 5678efgh... scb@28ba58e278da`)
-  * Tick the box "Allow write access" to enable this key to push changes to the repository
-  * Click "Add key"
+* Click on "Settings", then "Deploy keys", then "Add deploy key"
+* Type a title (e.g., "SCB")
+* In the "Key" box, copy/paste the string generated above starting (e.g. `ssh-rsa 5678efgh... scb@28ba58e278da`)
+* Tick the box "Allow write access" to enable this key to push changes to the repository
+* Click "Add key"
  <a name="lnd"></a>
 ### Create or restore the LND wallet
 
