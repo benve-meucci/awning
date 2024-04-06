@@ -35,6 +35,8 @@ The `.env` file contains some **Awning** setup parameters that you can customize
 - **RTL_PASSWORD** - Choose the password for accessing the *"Ride The Lightning"* web interface. You can change it any time but don't forget to restart the RTL container afterwards with `docker-compose restart rtl`.
 - <a name="pwd"></a>**LND_PASSWORD** - Choose the password to automatically protected and unlock the LND wallet. You will need to use this password again [here](#lnd). Changing this after the first setup will have no effect.
 - <a name="repo"></a>**SCB_REPO** - Paste here the address of your new created Github repository. It should be something like `git@github.com:giovantenne/remote-lnd-backup.git`.
+- **UID** - The uid (user id) of your current user. Use this command to retrieve it: `id -u`
+- **GID** - The gid (group id) of your current user. Use this command to retrieve it: `id -g`
 
 
 # How to begin

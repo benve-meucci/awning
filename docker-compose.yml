@@ -18,7 +18,7 @@ services:
 
   bitcoin:
     container_name: bitcoin
-    user: "1000:1000"
+    user: "${UID}:{GID}"
     depends_on: [tor]
     build:
       context: ./Dockerfiles/
@@ -36,7 +36,7 @@ services:
 
   electrs:
     container_name: electrs
-    user: "1000:1000"
+    user: "${UID}:{GID}"
     depends_on: [bitcoin]
     build:
       context: ./Dockerfiles/
@@ -49,7 +49,7 @@ services:
 
   lnd:
     container_name: lnd
-    user: "1000:1000"
+    user: "${UID}:{GID}"
     depends_on: [bitcoin, tor]
     build:
       context: ./Dockerfiles/
@@ -69,7 +69,7 @@ services:
 
   scb:
     container_name: scb
-    user: "1000:1000"
+    user: "${UID}:{GID}"
     depends_on: [lnd]
     build:
       context: ./Dockerfiles/
@@ -83,7 +83,7 @@ services:
 
   rtl:
     container_name: rtl
-    user: "1000:1000"
+    user: "${UID}:{GID}"
     depends_on: [lnd]
     build:
       context: ./Dockerfiles/
