@@ -120,6 +120,17 @@ Enter your password as wallet password (it must be exactly the same you stored i
 
 To create a a new wallet, select `n` when asked if you have an existing cipher seed. Just press enter if asked about an additional seed passphrase, unless you know what you’re doing. A new cipher seed consisting of 24 words is created.
 
+# Useful comands
+| Command | Description |
+| --- | --- |
+| `docker ps` |  Lists the containers that are running on your host |
+| `docker logs -f bitcoin` | Stream the logs fo the *bitcoin/lnd/electrs* container |
+| `docker exec -it lnd bash` |  Connect to the *lnd* container so that you can use the `lncli` command (eg. `lncli getinfo`) |
+| `docker-compose restart bitcoin` | Restart the *bitcoin/lnd/electrs* container |
+| `docker-compose build --no-cache` | Rebuild all the containers from scratch |
+
+
+
 # Directory structure
 ```bash
 ├── configs
