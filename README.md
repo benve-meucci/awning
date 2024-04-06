@@ -3,7 +3,7 @@ Something like [Umbrel](https://umbrel.com) but uglier, Bitcoin/Lightning-Networ
 
 **Awning** doesn't install anything on your PC, making it lightweight, customizable and portable.
 
-It is a plain/vanilla Docker setup. No script is ever run in your host.
+It is a plain/vanilla Docker setup. **No script is ever run in your host.**
 
 # Prerequisites
 - docker
