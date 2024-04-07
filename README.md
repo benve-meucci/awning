@@ -126,7 +126,7 @@ Ride The Lightining is accessible on both `http` and `https` with a self signed 
 
 If you are running **Awning** on your PC you can access the web interface through through these URLs:
 - [https://localhost:8081](https://localhost:8081)
-- [http://localhost:8082](http2://localhost:8082)
+- [http://localhost:8082](http://localhost:8082)
 
 Replace `localhost` with the IP of your node if you are runnin **Awning** on a different PC.
 
