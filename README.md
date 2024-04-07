@@ -120,6 +120,16 @@ Enter your password as wallet password (it must be exactly the same you stored i
 
 To create a a new wallet, select `n` when asked if you have an existing cipher seed. Just press enter if asked about an additional seed passphrase, unless you know what you’re doing. A new cipher seed consisting of 24 words is created.
 
+# Accessing RTL web interface
+
+Ride The Lightining is accessible on both `http` and `https` with a self signed SSL certificate (so expect a warning message from your browser) using the [password](#3) choosen on the `.env` file.
+
+If you are running **Awning** on your PC you can access the web interface through through these URLs:
+- [https://localhost:8081](https://localhost:8081)
+- [http://localhost:8082](http2://localhost:8082)
+
+Replace `localhost` with the IP of your node if you are runnin **Awning** on a different PC.
+
 # Useful comands
 | Command | Description |
 | --- | --- |
@@ -131,7 +141,7 @@ To create a a new wallet, select `n` when asked if you have an existing cipher s
 
 
 
-# Directory structure
+# Directories structure
 ```bash
 ├── configs
 │   ├── bitcoin.conf
